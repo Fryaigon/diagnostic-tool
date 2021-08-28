@@ -5,7 +5,7 @@ app.secret_key = "SUNABACO"
 
 @app.route('/')
 def hello_world():
-    return 'Hello, Flask World!'
+    return render_template('home.html')
 
 
 

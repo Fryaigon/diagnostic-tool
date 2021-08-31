@@ -10,7 +10,49 @@
     <script src="../static/JS/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-    <h1>hello world</h1>
+    <h1>SUNABACO診断所</h1>
+    <div id="selection">
+        <p>--どちらかを選択してください--</p>
+        <input type="submit" name="host" value="ルーム作成者" id="host">
+        <input type="submit" name="join" value="ルーム参加者" id="join">
+    </div>
+    <div class="host" style="display: none;">
+        <p>--代表者が入力してください--</p>
+
+        <form method="POST" action="/home" name="make">
+        <span>人数</span><input type="number" name="capacity" placeholder="1~4" min="1" max="4" required><span>人</span>
+        <br>
+        <span>ルーム名<input type="text" name="roomname" placeholder="半角英数最大8字" maxlength="8" required></span>
+        <br>
+        <span>パスコード<input type="number" name="pass" maxlength="4" placeholder="数字4桁 * * * * " required></span>
+        <br>
+        <input type="submit" value="ルームを作成" name="build">
+        </form>
+    </div>
+
+
+    <div class="join" hidden>
+        <p>--入室したいルーム名、及びパスコードを入力し入室してください--</p>
+        <table border="1">
+            <tr>
+                <td>ルーム名</td>
+                <td>パスコード:数字4桁</td>
+                {% for item in html_info %}
+            </tr>
+            <tr>
+                <td>{{item["name"]}}</td>
+                <form method="POST" action="/home" name="passcheck">
+                <td><input type="password" name="passcode" maxlength="4" required></td>
+                </form>
+                {% endfor %}
+            </tr>
+        </table>
+        <input type="submit" value="ルームに参加" id="enter">
+    </div>
+
+
+
+
     <script src="../static/JS/home.js"></script>
 </body>
 </html>

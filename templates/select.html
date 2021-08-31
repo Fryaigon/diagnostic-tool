@@ -10,6 +10,25 @@
     <script src="../static/JS/jquery-3.2.1.min.js"></script>
 </head>
 <body>
+    <h1>SUNABACO診断所</h1>
+    <div class="join">
+        <p>--入室したいルーム名、及びパスコードを入力し入室してください--</p>
+        <table border="1">
+            <tr>
+                <td>ルーム名</td>
+                <td>パスコード:数字4桁</td>
+                {% for item in html_info %}
+            </tr>
+            <tr>
+                <td>{{item["name"]}}</td>
+                <form method="POST" action="/select" name="passcheck">
+                <td><input type="password" name="passcode" maxlength="4" required></td>
+                </form>
+                {% endfor %}
+            </tr>
+        </table>
+        <input type="submit" value="ルームに参加" id="enter">
+    </div>
     
     <script src="../static/JS/select.js"></script>
 </body>

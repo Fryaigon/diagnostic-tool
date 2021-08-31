@@ -6,24 +6,15 @@ app.secret_key = "SUNABACO"
 #サイトに入ったらルーム作成者か参加者を選択させる
 @app.route('/')
 def select():
-    return redirect('/home')
+    return render_template('start.html')
 
-#立てられている部屋の情報を表示
-@app.route('/home')
-def roominfo():
-    connect = sqlite3.connect('icebreak.db')
-    cursor = connect.cursor()
-    cursor.execute("SELECT roomName FROM room WHERE openFlg = 0")
-    room_data = cursor.fetchall()
-    room_list =[]
-    for row in room_data:
-        room_list.append({"name":row[0]})
-    connect.close()
-    return render_template('home.html', html_info = room_list)
-
+#ルームホストの設定
+@app.route('/host')
+def build():
+    return render_template('home.html')
 
 #部屋の情報をDBに格納
-@app.route('/home', methods=["POST"])
+@app.route('/host', methods=["POST"])
 def home_post():
     capacity = request.form.get('capacity')
     roomname = request.form.get('roomname')
@@ -33,10 +24,27 @@ def home_post():
     cursor.execute("INSERT INTO room VALUES (null, ?, ?, ?, 0)", (capacity, roomname, passcode))
     connect.commit()
     connect.close()
-    return render_template('checker.html')
+    return redirect('/checker')
+
+#立てられている部屋の情報を表示
+@app.route('/join')
+def join():
+    connect = sqlite3.connect('icebreak.db')
+    cursor = connect.cursor()
+    cursor.execute("SELECT roomName FROM room WHERE openFlg = 0")
+    room_data = cursor.fetchall()
+    room_list =[]
+    for row in room_data:
+        room_list.append({"name":row[0]})
+    connect.close()
+    return render_template('select.html', html_info = room_list)
+
+@app.route('/join',methods=["POST"])
+def match():
+    return 
 
 
-@app.route('/checker/<int:roomId>')
+@app.route('/checker')
 def checker():
     return render_template('/checker.html')
 

@@ -12,22 +12,29 @@
 <body>
     <h1>SUNABACO診断所</h1>
     <div class="join">
-        <p>--入室したいルーム名、及びパスコードを入力し入室してください--</p>
-        <table border="1">
+        <form method="POST" action="/join" name="passcheck">
+        <p>--入室したいルームの名前を押してください--</p>
+        <table border="1" id="list">
             <tr>
                 <td>ルーム名</td>
-                <td>パスコード:数字4桁</td>
-                {% for item in html_info %}
+                <td>定員数</td>
+                <td>参加人数</td>
             </tr>
+            {% for item in html_info %}    
             <tr>
-                <td>{{item["name"]}}</td>
-                <form method="POST" action="/select" name="passcheck">
-                <td><input type="password" name="passcode" maxlength="4" required></td>
-                </form>
-                {% endfor %}
+                <td><input id="click" type="submit" value="{{item['name']}}" style="width: 100%;"></td>
+                <td>{{item["capacity"]}}</td>
+                <td>{{item["users"]}}</td>
             </tr>
+            {% endfor %}
         </table>
+        <div class="send">
+        <br>
+        <span style="border: #000 1px solid; display: inline-block;">パスコード入力→</span>
+        <input type="number" placeholder="数字4桁 * * * * " required  maxlength="4" min="0000" max="9999">
         <input type="submit" value="ルームに参加" id="enter">
+        </div>
+    </form>
     </div>
     
     <script src="../static/JS/select.js"></script>

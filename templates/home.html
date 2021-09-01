@@ -13,12 +13,12 @@
     <h1>SUNABACO診断所</h1>
     <div class="host">
         <p>--代表者が入力してください--</p>
-        <form method="POST" action="/home" name="make">
+        <form method="POST" action="/host" name="make">
         <span>人数</span><input type="number" name="capacity" placeholder="1~4" min="1" max="4" required><span>人</span>
         <br>
         <span>ルーム名<input type="text" name="roomname" placeholder="半角英数最大8字" maxlength="8" required></span>
         <br>
-        <span>パスコード<input type="number" name="pass" maxlength="4" placeholder="数字4桁 * * * * " required></span>
+        <span>パスコード<input type="number" name="pass" placeholder="数字4桁 * * * * " required  maxlength="4" min="0000" max="9999"></span>
         <br>
         <input type="submit" value="ルームを作成" name="build">
         </form>

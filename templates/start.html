@@ -13,8 +13,10 @@
     <h1>SUNABACO診断所</h1>
     <div id="selection">
         <p>--どちらかを選択してください--</p>
-        <input type="submit" onclick="location.href='/host'" value="ルーム作成者" name="host">
-        <input type="submit" onclick="location.href='/join'" value="ルーム参加者" name="join">
+        <form action="/" method="post" name="select">
+            <input type="submit" value="ルーム作成者" name="host">
+            <input type="submit" value="ルーム参加者" name="join">
+        </form>
     </div>
     <script src="../static/JS/start.js"></script>
 </body>
